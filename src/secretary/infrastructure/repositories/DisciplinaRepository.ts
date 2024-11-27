@@ -1,9 +1,9 @@
 import { Disciplina } from "../../domain/Disciplina";
-import { createPrismaClient } from "../../../shared.kernel/prisma";
+import { PrismaSingleton } from "../../../shared.kernel/prisma";
 import { IDisciplinaRepository } from "../interfaces/IDisciplinaRepository";
 
 export class DisciplinaRepository implements IDisciplinaRepository {
-  private prisma = createPrismaClient();
+  private prisma = PrismaSingleton.getInstance();
 
   public async get(
     disciplinaId?: number,

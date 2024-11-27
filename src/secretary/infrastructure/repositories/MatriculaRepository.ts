@@ -1,10 +1,10 @@
-import { createPrismaClient } from "../../../shared.kernel/prisma";
+import { PrismaSingleton } from "../../../shared.kernel/prisma";
 import { Matricula } from "../../domain/Matricula";
 import { IMatriculaRepository } from "../interfaces/IMatriculaRepository";
 
 export class MatriculaRepository implements IMatriculaRepository {
   private matriculas: Matricula[] = [];
-  private prisma = createPrismaClient();
+  private prisma = PrismaSingleton.getInstance();
 
   public async getAll(): Promise<Matricula[]> {
     const response_database = await this.prisma.matricula.findMany();

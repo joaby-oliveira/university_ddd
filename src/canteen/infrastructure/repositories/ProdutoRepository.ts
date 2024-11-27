@@ -1,10 +1,10 @@
 import { Produto } from "../../domain/Produto";
 import { IProdutoRepository } from "../interfaces/IProdutoRepository";
-import { createPrismaClient } from "../../../shared.kernel/prisma";
+import { PrismaSingleton } from "../../../shared.kernel/prisma";
 
 export class ProdutoRepository implements IProdutoRepository {
     private produtos: Produto[] = [];
-    private prisma = createPrismaClient();
+    private prisma = PrismaSingleton.getInstance();
 
     public async getAll(): Promise<Produto[]> {
         const response_database = await this.prisma.produto.findMany()

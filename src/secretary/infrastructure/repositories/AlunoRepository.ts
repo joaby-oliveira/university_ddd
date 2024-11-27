@@ -1,11 +1,10 @@
 import { IAlunoRepository } from "../interfaces/IAlunoRepository";
-import { createPrismaClient } from "../../../shared.kernel/prisma";
+import { PrismaSingleton } from "../../../shared.kernel/prisma";
 import { Aluno } from "../../domain";
-
 
 export class AlunoRepository implements IAlunoRepository {
   private alunos: Aluno[] = [];
-  private prisma = createPrismaClient();
+  private prisma = PrismaSingleton.getInstance();
 
   // TODO: implementar retorno do banco de dados
   // TODO: popular o banco de dados
@@ -32,7 +31,7 @@ export class AlunoRepository implements IAlunoRepository {
     const response_database = await this.prisma.aluno.findUnique({
       where: {
         id_aluno: alunoId,
-        ...(email && { email })
+        ...(email && { email }),
       },
     });
 

@@ -1,9 +1,9 @@
 import { Pagamento } from "../../domain/Pagamento";
-import { createPrismaClient } from "../../../shared.kernel/prisma";
+import { PrismaSingleton } from "../../../shared.kernel/prisma";
 import { IPagamentoRepository } from "../interfaces/IPagementoRepository";
 
 export class PagamentoRepository implements IPagamentoRepository {
-    private prisma = createPrismaClient();
+    private prisma = PrismaSingleton.getInstance();
 
     public async fechar_pagamento(id_conta: number, valor: number): Promise<Pagamento> {
 
